@@ -14,7 +14,6 @@
       min-height: 100vh;
     }
 
-    /* NAV */
     nav {
       display: flex;
       justify-content: space-between;
@@ -41,7 +40,6 @@
     }
     nav a:hover { color: #fff; }
 
-    /* HERO */
     .hero {
       text-align: center;
       padding: 100px 24px 80px;
@@ -76,7 +74,6 @@
       margin-bottom: 40px;
     }
 
-    /* APP STORE BUTTON */
     .btn-appstore {
       display: inline-flex;
       align-items: center;
@@ -91,9 +88,26 @@
       transition: opacity 0.2s, transform 0.15s;
     }
     .btn-appstore:hover { opacity: 0.9; transform: scale(1.02); }
-    .btn-appstore svg { width: 20px; height: 20px; }
 
-    /* FEATURES */
+    /* NEW SUPPORT BUTTON */
+    .btn-support {
+      display: inline-block;
+      margin-top: 16px;
+      background: rgba(167,139,250,0.12);
+      color: #a78bfa;
+      border: 1px solid rgba(167,139,250,0.3);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-support:hover {
+      background: rgba(167,139,250,0.2);
+      transform: translateY(-1px);
+    }
+
     .section {
       max-width: 900px;
       margin: 0 auto;
@@ -114,6 +128,7 @@
       margin-bottom: 48px;
       color: #fff;
     }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -125,29 +140,7 @@
       border-radius: 16px;
       padding: 28px 24px;
     }
-    .feature-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(167,139,250,0.12);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    .feature-card h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #fff;
-    }
-    .feature-card p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.6;
-    }
 
-    /* DIVIDER */
     .divider {
       border: none;
       border-top: 1px solid rgba(255,255,255,0.07);
@@ -155,52 +148,16 @@
       margin: 0 auto;
     }
 
-    /* PRIVACY POLICY */
     #privacy {
       max-width: 700px;
       margin: 0 auto;
       padding: 60px 24px;
     }
-    #privacy h2 {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-    .privacy-date {
-      font-size: 13px;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 40px;
-    }
+
     .privacy-block {
       margin-bottom: 36px;
     }
-    .privacy-block h3 {
-      font-size: 17px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-    .privacy-block p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.75;
-    }
-    .highlight-box {
-      background: rgba(167,139,250,0.08);
-      border: 1px solid rgba(167,139,250,0.2);
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 36px;
-    }
-    .highlight-box p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.7;
-    }
-    .highlight-box strong { color: #c4b5fd; }
 
-    /* FOOTER */
     footer {
       text-align: center;
       padding: 40px 24px;
@@ -208,119 +165,39 @@
       font-size: 13px;
       color: rgba(255,255,255,0.3);
     }
-    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
-    footer a:hover { color: rgba(255,255,255,0.7); }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-logo">Shape<span>Rush</span></div>
     <a href="#privacy">Privacy Policy</a>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-badge">Available on iOS</div>
     <h1>Survive the<br><span>Shape Rush</span></h1>
     <p>A fast-paced wave survival game. Dodge, evolve, and outlast endless waves of shapes — how long can you last?</p>
-    <a href="#" class="btn-appstore">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download on the App Store
-    </a>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="section">
-    <div class="section-label">Features</div>
-    <h2>Built for one more run</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
-        </div>
-        <h3>Endless Waves</h3>
-        <p>Waves get faster and denser. Every run is different — survive as long as you can.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
-            <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
-          </svg>
-        </div>
-        <h3>Global Leaderboards</h3>
-        <p>Sign in with Game Center and compete with players worldwide for the top spot.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-          </svg>
-        </div>
-        <h3>Quick Sessions</h3>
-        <p>Pick up and play in seconds. Perfect for a quick burst or a long grind session.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-          </svg>
-        </div>
-        <h3>iOS Native</h3>
-        <p>Designed and optimized for iPhone. Smooth 60fps gameplay on all supported devices.</p>
-      </div>
-    </div>
+    <a href="#" class="btn-appstore">Download on the App Store</a>
   </section>
 
   <hr class="divider" />
 
-  <!-- PRIVACY POLICY -->
   <section id="privacy">
     <div class="section-label">Legal</div>
     <h2>Privacy Policy</h2>
-    <p class="privacy-date">Effective date: 2025</p>
-
-    <div class="highlight-box">
-      <p><strong>Short version:</strong> Shape Rush does not collect, store, or share any personal data. We don't track you. We don't sell your information. We don't even have a server to send your data to.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Data collection</h3>
-      <p>Shape Rush does not collect any personal data whatsoever. We do not collect your name, email address, device identifiers, location, usage analytics, crash reports, or any other information about you or your device.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Game Center</h3>
-      <p>Shape Rush uses Apple Game Center for global leaderboards. When you choose to sign in to Game Center, Apple handles all authentication and score submissions directly. We do not receive, store, or have access to your Apple ID, Game Center profile, or any personal information. Game Center use is entirely optional — you can play Shape Rush without signing in. Apple's own privacy policy governs your Game Center data. You can review it at apple.com/legal/privacy.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Third-party services</h3>
-      <p>Shape Rush does not include any third-party analytics SDKs, advertising networks, crash reporting services, or tracking libraries. The only optional third-party integration is Apple Game Center, as described above.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Children's privacy</h3>
-      <p>Because Shape Rush does not collect any data from any users, it is safe for users of all ages. We comply with the Children's Online Privacy Protection Act (COPPA) and equivalent regulations by design — there is simply no data to collect.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Changes to this policy</h3>
-      <p>If we ever update this privacy policy, we will post the updated version here with a new effective date. Any significant changes will also be noted in the App Store release notes.</p>
-    </div>
 
     <div class="privacy-block">
       <h3>Contact</h3>
-      <p>Have a question about privacy? You can reach us through the App Store support link on the Shape Rush app page.</p>
+      <p>Need help or have a question?</p>
+      <a href="mailto:ame.do000702@gmail.com" class="btn-support">
+        Contact Support
+      </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Shape Rush &nbsp;·&nbsp; <a href="#privacy">Privacy Policy</a></p>
+    <p>&copy; 2025 Shape Rush</p>
   </footer>
 
 </body>
