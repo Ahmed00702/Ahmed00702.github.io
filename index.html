@@ -3,321 +3,543 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shape Rush</title>
+  <title>Yumvio – Cook Smarter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:     #F4611A;
+      --orange-mid: #FF8C42;
+      --orange-pale:#FFF1E8;
+      --white:      #FFFFFF;
+      --ink:        #1A0E06;
+      --muted:      #7A5A46;
+    }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0a0a0f;
-      color: #f0f0f5;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--ink);
       min-height: 100vh;
     }
 
-    /* NAV */
+    /* ── HERO ────────────────────────────────── */
+    .hero {
+      background: var(--orange);
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* decorative circles */
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .hero::before {
+      width: 520px; height: 520px;
+      background: var(--white);
+      top: -160px; right: -140px;
+    }
+    .hero::after {
+      width: 320px; height: 320px;
+      background: var(--white);
+      bottom: -80px; left: -60px;
+    }
+
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      position: sticky;
-      top: 0;
-      background: #0a0a0f;
-      z-index: 100;
+      padding: 28px 48px;
+      position: relative;
+      z-index: 2;
     }
-    .nav-logo {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: #fff;
-    }
-    .nav-logo span { color: #a78bfa; }
-    nav a {
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: #fff; }
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 100px 24px 80px;
-      max-width: 700px;
-      margin: 0 auto;
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.5px;
     }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(167,139,250,0.12);
-      color: #a78bfa;
+
+    .logo span { opacity: 0.6; }
+
+    .nav-cta {
+      background: var(--white);
+      color: var(--orange);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    .hero-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 48px;
+      gap: 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      background: rgba(255,255,255,0.18);
+      color: var(--white);
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       padding: 6px 14px;
       border-radius: 100px;
-      border: 1px solid rgba(167,139,250,0.25);
-      margin-bottom: 28px;
+      display: inline-block;
     }
+
     h1 {
-      font-size: clamp(42px, 8vw, 72px);
-      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 9vw, 96px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
       letter-spacing: -2px;
-      line-height: 1.05;
-      margin-bottom: 20px;
+      max-width: 640px;
     }
-    h1 span { color: #a78bfa; }
-    .hero p {
-      font-size: 18px;
+
+    h1 em {
+      font-style: italic;
       color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      margin-bottom: 40px;
     }
 
-    /* APP STORE BUTTON */
-    .btn-appstore {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #fff;
-      color: #000;
-      text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 14px;
-      font-weight: 600;
-      font-size: 15px;
-      transition: opacity 0.2s, transform 0.15s;
-    }
-    .btn-appstore:hover { opacity: 0.9; transform: scale(1.02); }
-    .btn-appstore svg { width: 20px; height: 20px; }
-
-    /* FEATURES */
-    .section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-    .section-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #a78bfa;
-      margin-bottom: 12px;
-    }
-    .section h2 {
-      font-size: clamp(28px, 5vw, 42px);
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin-bottom: 48px;
-      color: #fff;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .feature-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 28px 24px;
-    }
-    .feature-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(167,139,250,0.12);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    .feature-card h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #fff;
-    }
-    .feature-card p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
+    .hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      max-width: 420px;
       line-height: 1.6;
     }
 
-    /* DIVIDER */
-    .divider {
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      max-width: 900px;
-      margin: 0 auto;
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
-    /* PRIVACY POLICY */
-    #privacy {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-    #privacy h2 {
-      font-size: 32px;
+    .btn-primary {
+      background: var(--white);
+      color: var(--orange);
       font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
+      font-size: 16px;
+      padding: 16px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform .15s, opacity .15s;
     }
-    .privacy-date {
-      font-size: 13px;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 40px;
-    }
-    .privacy-block {
-      margin-bottom: 36px;
-    }
-    .privacy-block h3 {
-      font-size: 17px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-    .privacy-block p {
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.92; }
+
+    .btn-ghost {
+      color: var(--white);
       font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      opacity: 0.75;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-ghost:hover { opacity: 1; }
+
+    .hero-foot {
+      padding: 32px 48px;
+      display: flex;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
       color: rgba(255,255,255,0.6);
-      line-height: 1.75;
+      margin-top: 4px;
+      letter-spacing: 0.5px;
     }
-    .highlight-box {
-      background: rgba(167,139,250,0.08);
-      border: 1px solid rgba(167,139,250,0.2);
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 36px;
+
+    /* ── STRIP ───────────────────────────────── */
+    .strip {
+      background: var(--orange-pale);
+      padding: 18px 48px;
+      display: flex;
+      gap: 48px;
+      overflow-x: auto;
+      align-items: center;
     }
-    .highlight-box p {
+    .strip-item {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .strip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--orange-mid); flex-shrink: 0; }
+
+    /* ── FEATURES ────────────────────────────── */
+    .features {
+      padding: 96px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .features-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .features-text h2 .accent { color: var(--orange); }
+
+    .features-text p {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 400px;
+    }
+
+    .feature-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--orange-pale);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform .2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .card.highlighted {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .card.highlighted p { color: rgba(255,255,255,0.75); }
+
+    /* ── HOW IT WORKS ────────────────────────── */
+    .how {
+      background: var(--ink);
+      padding: 96px 48px;
+    }
+
+    .how-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .how-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 4vw, 50px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+
+    .how-head p {
       font-size: 15px;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.5);
+      max-width: 280px;
+      line-height: 1.6;
+      text-align: right;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .step {
+      background: #231510;
+      padding: 36px 32px;
+      position: relative;
+    }
+    .step:first-child { border-radius: 20px 0 0 20px; }
+    .step:last-child  { border-radius: 0 20px 20px 0; }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--orange);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
       line-height: 1.7;
     }
-    .highlight-box strong { color: #c4b5fd; }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 40px 24px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      font-size: 13px;
-      color: rgba(255,255,255,0.3);
+    /* ── CTA BANNER ──────────────────────────── */
+    .cta-banner {
+      background: var(--orange);
+      padding: 96px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
     }
-    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
-    footer a:hover { color: rgba(255,255,255,0.7); }
+
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -1.5px;
+      max-width: 560px;
+    }
+
+    .cta-banner h2 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .cta-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .cta-right p {
+      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+      max-width: 260px;
+      line-height: 1.6;
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity .15s;
+    }
+    .btn-white:hover { opacity: 0.88; }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer {
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #EEE;
+    }
+
+    footer .logo { color: var(--orange); font-size: 22px; }
+
+    footer p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 768px) {
+      nav, .hero-body, .hero-foot, .strip, .features, .how, .cta-banner, footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .features { grid-template-columns: 1fr; }
+      .feature-cards { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; gap: 2px; }
+      .step:first-child { border-radius: 20px 20px 0 0; }
+      .step:last-child  { border-radius: 0 0 20px 20px; }
+      .how-head p { text-align: left; }
+      .cta-banner { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">Shape<span>Rush</span></div>
-    <a href="#privacy">Privacy Policy</a>
-  </nav>
-
-  <!-- HERO -->
+  <!-- ── HERO ── -->
   <section class="hero">
-    <div class="hero-badge">Available on iOS</div>
-    <h1>Survive the<br><span>Shape Rush</span></h1>
-    <p>A fast-paced wave survival game. Dodge, evolve, and outlast endless waves of shapes — how long can you last?</p>
-    <a href="#" class="btn-appstore">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download on the App Store
-    </a>
-  </section>
+    <nav>
+      <div class="logo">yum<span>vio</span></div>
+      <a href="https://apps.apple.com/app/id6467007797" class="nav-cta">Download Free</a>
+    </nav>
 
-  <!-- FEATURES -->
-  <section class="section">
-    <div class="section-label">Features</div>
-    <h2>Built for one more run</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
-        </div>
-        <h3>Endless Waves</h3>
-        <p>Waves get faster and denser. Every run is different — survive as long as you can.</p>
+    <div class="hero-body">
+      <span class="eyebrow">Your kitchen companion</span>
+      <h1>Cook with<br><em>confidence,</em><br>every night.</h1>
+      <p class="hero-sub">Yumvio guides you through every recipe step-by-step, helps you use what's already in your fridge, and makes cooking genuinely fun again.</p>
+      <div class="hero-actions">
+        <a href="https://apps.apple.com/app/id6467007797" class="btn-primary">Get Yumvio — It's Free</a>
+        <a href="#how-it-works" class="btn-ghost">See how it works ↓</a>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
-            <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
-          </svg>
-        </div>
-        <h3>Global Leaderboards</h3>
-        <p>Sign in with Game Center and compete with players worldwide for the top spot.</p>
+    </div>
+
+    <div class="hero-foot">
+      <div class="stat">
+        <span class="stat-num">50k+</span>
+        <span class="stat-label">Recipes available</span>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-          </svg>
-        </div>
-        <h3>Quick Sessions</h3>
-        <p>Pick up and play in seconds. Perfect for a quick burst or a long grind session.</p>
+      <div class="stat">
+        <span class="stat-num">4.9★</span>
+        <span class="stat-label">App store rating</span>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-          </svg>
-        </div>
-        <h3>iOS Native</h3>
-        <p>Designed and optimized for iPhone. Smooth 60fps gameplay on all supported devices.</p>
+      <div class="stat">
+        <span class="stat-num">2 min</span>
+        <span class="stat-label">To your first dish</span>
       </div>
     </div>
   </section>
 
-  <hr class="divider" />
+  <!-- ── STRIP ── -->
+  <div class="strip">
+    <div class="strip-item"><span class="strip-dot"></span> Step-by-step cooking mode</div>
+    <div class="strip-item"><span class="strip-dot"></span> Ingredient scanner</div>
+    <div class="strip-item"><span class="strip-dot"></span> Meal planner</div>
+    <div class="strip-item"><span class="strip-dot"></span> Dietary filters</div>
+    <div class="strip-item"><span class="strip-dot"></span> Timer built-in</div>
+    <div class="strip-item"><span class="strip-dot"></span> Offline mode</div>
+  </div>
 
-  <!-- PRIVACY POLICY -->
-  <section id="privacy">
-    <div class="section-label">Legal</div>
-    <h2>Privacy Policy</h2>
-    <p class="privacy-date">Effective date: 2025</p>
-
-    <div class="highlight-box">
-      <p><strong>Short version:</strong> Shape Rush does not collect, store, or share any personal data. We don't track you. We don't sell your information. We don't even have a server to send your data to.</p>
+  <!-- ── FEATURES ── -->
+  <section class="features">
+    <div class="features-text">
+      <h2>Your fridge.<br>Our <span class="accent">recipes.</span></h2>
+      <p>Tell Yumvio what ingredients you have on hand, and it builds a personalized menu around them — zero waste, maximum flavour.</p>
     </div>
-
-    <div class="privacy-block">
-      <h3>Data collection</h3>
-      <p>Shape Rush does not collect any personal data whatsoever. We do not collect your name, email address, device identifiers, location, usage analytics, crash reports, or any other information about you or your device.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Game Center</h3>
-      <p>Shape Rush uses Apple Game Center for global leaderboards. When you choose to sign in to Game Center, Apple handles all authentication and score submissions directly. We do not receive, store, or have access to your Apple ID, Game Center profile, or any personal information. Game Center use is entirely optional — you can play Shape Rush without signing in. Apple's own privacy policy governs your Game Center data. You can review it at apple.com/legal/privacy.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Third-party services</h3>
-      <p>Shape Rush does not include any third-party analytics SDKs, advertising networks, crash reporting services, or tracking libraries. The only optional third-party integration is Apple Game Center, as described above.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Changes to this policy</h3>
-      <p>If we ever update this privacy policy, we will post the updated version here with a new effective date. Any significant changes will also be noted in the App Store release notes.</p>
-    </div>
-
-    <div class="privacy-block">
-      <h3>Contact</h3>
-      <p>Have a question about privacy? You can reach us through the App Store support link on the Shape Rush app page.</p>
+    <div class="feature-cards">
+      <div class="card highlighted">
+        <h3>Guided Cooking Mode</h3>
+        <p>Hands-free, step-by-step instructions so you never lose your place.</p>
+      </div>
+      <div class="card">
+        <h3>Scan Ingredients</h3>
+        <p>Point your camera at your fridge. We'll suggest what to cook.</p>
+      </div>
+      <div class="card">
+        <h3>Weekly Meal Plans</h3>
+        <p>Plan the whole week in seconds, auto-generate your shopping list.</p>
+      </div>
+      <div class="card">
+        <h3>Smart Timers</h3>
+        <p>Multiple in-recipe timers, perfectly synced to each step.</p>
+      </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ── HOW IT WORKS ── -->
+  <section class="how" id="how-it-works">
+    <div class="how-head">
+      <h2>Ready in three<br>simple steps.</h2>
+      <p>From first open to first bite — Yumvio gets you cooking faster than you'd think.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Add your ingredients</h3>
+        <p>Type, scan, or speak what you have. Yumvio learns your pantry over time.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Pick your recipe</h3>
+        <p>Browse curated suggestions matched to your skill level, time, and taste.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Cook and enjoy</h3>
+        <p>Follow guided steps, set timers, and serve something you're proud of.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-banner">
+    <h2>Tonight's dinner<br>starts <em>here.</em></h2>
+    <div class="cta-right">
+      <p>Join thousands of home cooks who've made Yumvio part of their daily routine.</p>
+      <a href="https://apps.apple.com/app/id6467007797" class="btn-white">Download Yumvio Free</a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
   <footer>
-    <p>&copy; 2025 Shape Rush &nbsp;·&nbsp; <a href="#privacy">Privacy Policy</a></p>
-    <strong>Email:</strong>
-      <a href="mailto:ame.do00702@gmail.com">ame.do00702@gmail.com</a>
+    <div class="logo">yumvio</div>
+    <p>© 2026 Yumvio. All rights reserved.</p>
   </footer>
 
 </body>
